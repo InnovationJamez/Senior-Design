@@ -2,8 +2,33 @@
 <html>
 <head>
 	<title>Electric field</title>
+	<style>
+		canvas {
+			border: 1px solid black;
+		}
+		body{
+			margin: 0px;
+			border: 0px;
+		}
+	</style>
 </head>
 <body>
-	<script src="electricField.js" type="text/javascript"></script>
+	<canvas id="can"></canvas><br>
+	<label>Zoom: </label>
+	<input id="scale" type="range" step=0.1 min=1.0 max=5.0>
+	<label id="scaleValue">Value: </label><br>
+
+	<label>Width: </label>
+	<input id="width" type="range" step=0.1 min=0.5 max=2.0>
+	<label id="widthValue">Value: </label><br>
+
+	<label>Height: </label>
+	<input id="height" type="range" step=0.1 min=0.5 max=2.0>
+	<label id="heightValue">Value: </label>
+
+	<script src="functions.js">
+		</script>
+	<script src="electricField.js">
+		</script>
 </body>
 </html>
