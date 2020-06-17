@@ -5,6 +5,7 @@
 	<style>
 		canvas {
 			border: 1px solid black;
+			background-color: rgb(200, 200, 200);
 		}
 		body{
 			margin: 0px;
@@ -14,6 +15,7 @@
 </head>
 <body>
 	<canvas id="can"></canvas><br>
+	
 	<label>Zoom: </label>
 	<input id="scale" type="range" step=0.1 min=1.0 max=5.0>
 	<label id="scaleValue">Value: </label><br>
@@ -24,7 +26,15 @@
 
 	<label>Height: </label>
 	<input id="height" type="range" step=0.1 min=0.5 max=2.0>
-	<label id="heightValue">Value: </label>
+	<label id="heightValue">Value: </label><br>
+
+	<label>Voltage: </label>
+	<input id="voltage" value="5" type="range" step=0.1 min=0.5 max=20.0>
+	<label id="voltageValue">Value: </label><br>
+
+	<button onclick="addIons(10)">Add Ions</button>
+	<button>Start</button>
+
 
 	<script src="functions.js">
 		</script>

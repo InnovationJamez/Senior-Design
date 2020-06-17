@@ -30,12 +30,15 @@ function polarForm(radias, angle){
 	stores the attributes for each ion 
 */
 
-function ion(x, y, c){
+function ion(x, y, c, r){
 	// the position of the partactle
 	this.position = new rectForm(x, y);
 	// the charge of the ion
 	this.charge = c;
 }
+
+// the radias value shared by all charges
+ion.prototype.radias = 0.035;
 
 /*
  	get the magnitude of the electric field 
@@ -54,6 +57,14 @@ function ion(x, y, c){
  	// calculate the field
  	var field = (k * Q) / (Math.pow(r, 2));
  	// get the angle of the probe to the ion
+ }
+
+ /* 
+ 	get the magnitude of the 
+ 	uniform electric field at ion position
+ */
+
+ function getFieldAtPoint(ion){
 
  }
 
@@ -95,6 +106,7 @@ function getAngle(ion, probe){
 		var angle = 360 - Math.atan(yDif / xDif) * 180 / Math.PI;
 	}
 
+	// make sure it lies between 0 and 359
 	angle = angle % 360;
 	// return the angle value
 	return angle;
@@ -115,6 +127,13 @@ function hyp(x, y){
 }
 
 /*
+	generate a random value within the given boudnaries
+*/
+function rand(min, max){
+	return Math.random() * (max - min) + min;
+}
+
+/*
 	canvas drawing functions and refrcences
 */
 
@@ -123,7 +142,7 @@ function hyp(x, y){
 	draw the measurement marks on the field
 	make ten marks and display the unit somewhere
 */
-function drawField(c){
+function drawField(c, voltage){
 	// set the fill color to green
 	c.fillStyle = "lightgreen";
 
@@ -132,10 +151,11 @@ function drawField(c){
 
 	// bagin the path
 	c.beginPath();
-	c.lineStyle = "rgba(20, 20, 20, 0.5)";
+	c.strokeStyle = "black";
+	c.lineWidth = 0.5;
 
 	// the number of vertical lines to draw
-	var xLen = Math.ceil((theoWidth / ratio) / inc + 1);
+	var xLen = theoWidth / 0.1 + 1;
 	// vartical lines
 	for(var i = 0; i < xLen; i++){
 		// draw each line
@@ -143,30 +163,105 @@ function drawField(c){
 		c.lineTo(i * inc + minX, minY + theoHeight / ratio);
 	}
 	// the number of horizontal lines to draw
-	var yLen = Math.ceil((theoHeight / ratio) / inc + 1);
+	var yLen = theoHeight / 0.1 + 1;
 	// horizontal lines
 	for(var i = 0; i < yLen; i++){
 		// dra each line
 		c.moveTo(minX, i * inc + minY);
 		c.lineTo(minX + theoWidth / ratio, i * inc + minY);
+
 	}
 	c.stroke();
+	// draw pluses to show the posetive side of the field
+	var step = 0.05 / ratio;
+	var x = theoWidth / ratio + step + minX;
+	var x1 = minX - step;
+	var yMin = minY + step;
+	// for each space
+	for(var i = 0; i < theoHeight / 0.1; i++){
+		// draw plus
+		drawPlus(x, yMin + i * step * 2, true);
+		// draw minus
+		drawPlus(x1, yMin + i * step * 2, false);
+	}	
+}
 
+/*
+	draw the info text on the screen
+*/
+function drawText(){
+	// draw the value of the voltage drop of the field
+	// draw the voltage in top right coner of the screen
+	var text = "Voltage: " + voltage + " V";
+	var text2 = "Uniform field: " + (voltage / theoWidth).toFixed(2) + " V/m";
+	c.font="30px Arial";
+	c.fillStyle="black";
+	// draw text
+	c.fillText(text, 25, 50);
+	c.fillText(text2, 25, 75);
+}
+
+/*
+	get an x and y postion 
+	and draw a plus at that location
+*/
+function drawPlus(x, y, pos){
+	// 0.1 in screen space
+	var dist = 0.1 / (2 * ratio);
+	c.beginPath();
+	// horixontal line
+	c.arc(x, y, dist, 0, 2 * Math.PI);
+	c.moveTo(x - dist, y);
+	c.lineTo(x + dist, y);
+	// vetical line
+	if(pos){
+		c.moveTo(x, y - dist);
+		c.lineTo(x, y + dist);
+	}
+	c.stroke();
 }
 
 /*
 	get ion and draw based on charage and position
 */
 function drawIon(ion, c){
+	// the radias of the sphear
+	const rad = ion.radias / ratio;
 	// the position in screen space
 	var xVal = ion.position.xValue  / ratio + minX;
 	var yVal = ion.position.yValue / ratio + minY;
 	// draw the circle
 	c.beginPath();
-	c.arc(xVal, yVal, 5, 0, 2 * Math.PI);
-	c.fillStyle = (ion.charge) ? "black" : "red";
+	c.strokeStyle = "black";
+	c.arc(xVal, yVal, rad, 0, 2 * Math.PI);
+	c.fillStyle = (ion.charge > 0) ? "black" : "red";
 	c.fill();
+	// draw the plus or minus
+	c.beginPath();
+	c.lineWidth = rad / 5;
+	c.strokeStyle = "white";
+	// vertical line only draw if cation
+	if(ion.charge > 0){
+		c.moveTo(xVal, yVal + rad * 0.8);
+		c.lineTo(xVal, yVal - rad * 0.8);
+	}
+	// horizontal line
+	c.moveTo(xVal + rad * 0.8, yVal);
+	c.lineTo(xVal - rad * 0.8, yVal);
 	c.stroke();
+}
+
+/*
+	get a list of ions and draw each ion
+	on the field
+*/
+function drawIons(ions, c){
+	// the number of ions
+	var len = ions.length;
+	// for each ion draw it
+	for(var i = 0; i < len; i++){
+		drawIon(ions[i], c);
+	}
 }
 
 // draw an arrow pointing in the given angle
