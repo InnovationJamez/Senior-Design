@@ -17,15 +17,15 @@
 	<canvas id="can"></canvas><br>
 	
 	<label>Zoom: </label>
-	<input id="scale" type="range" step=0.1 min=1.0 max=5.0>
+	<input id="scale" type="range" step=0.1 min=1.0 value="1.5" max=5.0>
 	<label id="scaleValue">Value: </label><br>
 
 	<label>Width: </label>
-	<input id="width" type="range" step=0.1 min=0.5 max=2.0>
+	<input id="width" value="1.0" type="range" step=0.1 min=0.5 max=4.0>
 	<label id="widthValue">Value: </label><br>
 
 	<label>Height: </label>
-	<input id="height" type="range" step=0.1 min=0.5 max=2.0>
+	<input id="height" value="1.0" type="range" step=0.1 min=0.5 max=4.0>
 	<label id="heightValue">Value: </label><br>
 
 	<label>Voltage: </label>
@@ -33,7 +33,8 @@
 	<label id="voltageValue">Value: </label><br>
 
 	<button onclick="addIons(10)">Add Ions</button>
-	<button>Start</button>
+	<button id="stBtn" onclick="setAnim()">Start</button>
+	<button onclick="setNextLocation()">Step</button>
 
 
 	<script src="functions.js">

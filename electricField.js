@@ -13,18 +13,22 @@ c = can.getContext("2d");
 
 // for setting the scale
 var scaleSlider = document.getElementById("scale");
+// get html element for scale vlaue
 var scaleValue = document.getElementById("scaleValue");
 
 // for setting the width
 var width = document.getElementById("width");
+// get refrence to width element
 var widthValue = document.getElementById("widthValue");
 
 // for setting the height
 var height = document.getElementById("height");
+// get refrcent o height value html element
 var heightValue = document.getElementById("heightValue");
 
 // input for setting the voltage
 var vInput = document.getElementById("voltage");
+// get html element for voltage value
 var vValue = document.getElementById("voltageValue");
 
 // ratio from thoeretical to pixels
@@ -39,7 +43,7 @@ var inc;
 var theoHeight = height.value;
 var theoWidth = width.value;
 
-// bottom corner of the field
+// bottom corner of the field in screen space
 var minX;
 var minY;
 
@@ -58,6 +62,12 @@ const rad = 0.04;
 
 // the list of ions
 var ions = [];
+
+// refrnce to repeating anim function
+var anim;
+
+// state of the anim true:play false:pause
+var state = false;
 
 /*
 	set the values for the sreen ratio and 
@@ -123,7 +133,7 @@ function update(){
 	// draw ions
 	drawIons(ions, c);
 	//draw ui text
-	drawText();
+	//drawText();
 }
 
 /*
@@ -190,10 +200,11 @@ height.addEventListener("change", function(){
 vInput.addEventListener("change", function(){
 	// set the voltage
 	voltage = vInput.value;
+	// voltage field of the field
+	uField = voltage / theoWidth;
 	// set the height html element
 	vValue.innerHTML = "Value: " + voltage + " V";
 	//draw ui text
 	update();
-
 });
 

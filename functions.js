@@ -33,7 +33,7 @@ function polarForm(radias, angle){
 function ion(x, y, c, r){
 	// the position of the partactle
 	this.position = new rectForm(x, y);
-	// the charge of the ion
+	// the charge of the ion int -1 or 1
 	this.charge = c;
 }
 
@@ -59,14 +59,6 @@ ion.prototype.radias = 0.035;
  	// get the angle of the probe to the ion
  }
 
- /* 
- 	get the magnitude of the 
- 	uniform electric field at ion position
- */
-
- function getFieldAtPoint(ion){
-
- }
 
  /*
 	get two rect forms and return 
@@ -264,6 +256,7 @@ function drawIons(ions, c){
 	}
 }
 
+
 // draw an arrow pointing in the given angle
 function drawArrow(angle, len, x, y, c){
 	c.beginPath();
@@ -284,6 +277,82 @@ function drawArrow(angle, len, x, y, c){
 	c.fill();
 	c.stroke();
 };
+
+/*
+if paused start the repeating function
+if playing stop the repeating funciton
+*/
+function setAnim(){
+	var stBtn = document.getElementById("stBtn");
+	if(ions.length == 0){
+		alert("there are no ions to simulate\npress the add ions button");
+	}
+	else if(state){
+		// stop the animation
+		clearInterval(anim);
+		stBtn.innerHTML = "Start";
+	}
+	else{
+		// start the anim
+		anim = setInterval(setNextLocation, 50);
+		stBtn.innerHTML = "Pause";
+	}
+	// toggle anim state
+	state = !state;
+}
+
+/*
+	set the speed of the ion depending on its lication in the field
+	find the next location of the partacle 
+	if collison dont move
+	else move the partacle to the new location
+*/
+function setNextLocation(){
+	// for each partacle conduct this function
+	ions.forEach(function(item, index) {
+		// calcualte the speed of the partacle
+		var speed = calcSpeed(item);
+		// find the next location of the partacle
+		var nextLoc = new rectForm(item.position.xValue + speed.xValue, 
+			item.position.yValue + speed.yValue);
+		// check if out of bounds or collide with an ion exchange membrane
+		if(nextLoc.xValue + ion.prototype.radias > theoWidth){
+			// cillison with right wall
+			nextLoc.xValue = theoWidth - ion.prototype.radias;
+		}
+		else if(nextLoc.xValue - ion.prototype.radias < 0){
+			nextLoc.xValue = ion.prototype.radias;
+		}
+		// check veritcal 
+		if(nextLoc.yValue + ion.prototype.radias > theoHeight){
+			nextLoc.yValue = theoHeight - ion.prototype.radias;
+		}
+		else if(nextLoc.yValue - ion.prototype.radias < 0){
+			nextLoc.yValue = ion.prototype.radias;
+		}
+
+		// loop through each membrane
+
+
+
+		// move the postion of the partacle
+		item.position.xValue = nextLoc.xValue;
+		item.position.yValue = nextLoc.yValue;
+	});
+	update();
+}
+
+/* 
+get the charge and return the speed of the partacle
+have the have some radmom movement with net movement 
+retained
+*/
+function calcSpeed(ion){
+	var xSpeed = -ion.charge * 0.01 + rand(-0.005, 0.005);
+	var ySpeed = rand(-0.005, 0.005);
+	speed = new rectForm(xSpeed, ySpeed);
+	return speed;
+}
 
 
 
