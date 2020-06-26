@@ -31,6 +31,16 @@ var vInput = document.getElementById("voltage");
 // get html element for voltage value
 var vValue = document.getElementById("voltageValue");
 
+// input for setting the number of ions
+var ionHtml = document.getElementById("ion");
+// get html element for ion value
+var ionValue = document.getElementById("ionValue");
+
+// input for setting the number of membranes
+var membrane = document.getElementById("membrane");
+// get html element for membrane value
+var memValue = document.getElementById("memValue");
+
 // ratio from thoeretical to pixels
 // the one pixel is x metets
 var ratio;
@@ -47,6 +57,13 @@ var theoWidth = width.value;
 var minX;
 var minY;
 
+/* 
+	global functions of the ion exchange barriors
+*/
+var barriors = [];
+
+var barNum = membrane.value;
+
 /*
 	the voltage drop across the field
 	and the charges
@@ -62,6 +79,9 @@ const rad = 0.04;
 
 // the list of ions
 var ions = [];
+
+// the number of ions to make
+var iNum = ionHtml.value;
 
 // refrnce to repeating anim function
 var anim;
@@ -118,7 +138,9 @@ function addIons(num){
 	scaleValue.innerHTML = "Value: " + scaleSlider.value;
 	widthValue.innerHTML = "Value: " + width.value + " m";
 	heightValue.innerHTML = "Value: " + height.value + " m";
-	vValue.innerHTML = "Value: " + vInput.value + " V";
+	vValue.innerHTML = "Value: " + vInput.value + " V"; 
+	ionValue.innerHTML = "Value: " + ionHtml.value + " Ions";
+	memValue.innerHTML = "Value: " + barNum + " Membranes";
  }
 
 /*
@@ -134,6 +156,8 @@ function update(){
 	drawIons(ions, c);
 	//draw ui text
 	//drawText();
+	// draw the barriors
+	drawBarriors();
 }
 
 /*
@@ -182,6 +206,8 @@ width.addEventListener("change", function(){
 	theoWidth = width.value;
 	// clear the ions
 	ions = [];
+	// add barriors to the field
+	addBarriors(barNum);
 	// call update function
 	update();
 });
@@ -204,7 +230,29 @@ vInput.addEventListener("change", function(){
 	uField = voltage / theoWidth;
 	// set the height html element
 	vValue.innerHTML = "Value: " + voltage + " V";
-	//draw ui text
+	//update the screen
 	update();
+});
+
+ionHtml.addEventListener("change", function(){
+	// set the voltage
+	iNum = ionHtml.value;
+	// set the ion value html element
+	ionValue.innerHTML = "Value: " + iNum + " Ions";
+});
+
+membrane.addEventListener("change", function(){
+	// set the voltage
+	barNum = membrane.value;
+	// set the ion value html element
+	memValue.innerHTML = "Value: " + barNum + " Membranes";
+	// add barriors to the field
+	addBarriors(barNum);
+	//update the screen
+	update();
+});
+
+document.getElementById("addBtn").addEventListener("click", function(){
+	addIons(iNum);
 });
 

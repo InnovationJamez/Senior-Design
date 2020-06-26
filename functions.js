@@ -17,6 +17,17 @@ function rectForm(x, y){
 }
 
 /*
+	stores the positon and the polarity of the 
+	ion exchange barrior
+*/
+function barrior(x, pol){
+	this.xPos = x;
+	this.polar = pol;
+}
+
+barrior.prototype.bWidth = 0.05;
+
+/*
 	the polar form of the force vector
 	the value is radias and angle
 */
@@ -256,6 +267,37 @@ function drawIons(ions, c){
 	}
 }
 
+/*
+draw the ion barriors on the field
+*/
+function drawBarriors(){
+	barriors.forEach(function(item, index) {
+		var bsWidth = barrior.prototype.bWidth / (ratio * 2);
+		var x1 = item.xPos / ratio - bsWidth + minX;
+		c.beginPath();
+		c.rect(x1, minY, bsWidth, theoHeight / ratio);
+		c.strokeStyle = (item.polar > 0) ? "grey" : "pink";
+		c.stroke();
+		c.fillStyle = (item.polar > 0) ? "grey" : "pink";
+		c.fill();
+	});
+}
+
+/*
+	add barriors to the list
+	evenly spaced and alternating charge
+*/
+function addBarriors(num){
+	// set the barriors to 0
+	barriors = [];
+	// distance between barriors
+	var dist = theoWidth / (parseInt(num) + 1);
+	// for each add a barrior
+	for(var i = 0; i < num; i++){
+		var charge = (i % 2 == 1) ? -1 : 1;
+		barriors.push(new barrior(dist * (i + 1), charge));
+	}
+}
 
 // draw an arrow pointing in the given angle
 function drawArrow(angle, len, x, y, c){
@@ -332,7 +374,29 @@ function setNextLocation(){
 		}
 
 		// loop through each membrane
-
+		barriors.forEach(function(bItem) {
+			var xMin = bItem.xPos - barrior.prototype.bWidth / 2;
+			var xMax = bItem.xPos + barrior.prototype.bWidth / 2;
+	
+			if(item.charge == bItem.polar){
+				// pass
+			}
+			// right side collision
+			else if(nextLoc.xValue + ion.prototype.radias > xMin && 
+						nextLoc.xValue + ion.prototype.radias < xMax){
+				nextLoc.xValue = xMin - ion.prototype.radias;
+			}
+			// left side collision
+			else if(nextLoc.xValue - ion.prototype.radias > xMin && 
+						nextLoc.xValue - ion.prototype.radias < xMax){
+				nextLoc.xValue = xMax + ion.prototype.radias;
+			}
+			// barrior in middle
+			else if(nextLoc.xValue + ion.prototype.ratio > xMax &&
+					nextLoc.xValue - ion.prototype.ratio < xMin){
+				nextLoc.xValue = (item.charge < 0) ? xMin - ion.prototype.radias : xMax + ion.prototype.radias;
+			}
+		});
 
 
 		// move the postion of the partacle

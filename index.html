@@ -32,7 +32,15 @@
 	<input id="voltage" value="5" type="range" step=0.1 min=0.5 max=20.0>
 	<label id="voltageValue">Value: </label><br>
 
-	<button onclick="addIons(10)">Add Ions</button>
+	<label>Ion number: </label>
+	<input id="ion" value="5" type="range" step=1 min=10 max=200>
+	<label id="ionValue">Value: </label><br>
+
+	<label>Membrane number: </label>
+	<input id="membrane" value="0" type="range" step=1 min=0 max=8>
+	<label id="memValue">Value: </label><br>
+
+	<button id="addBtn">Add Ions</button>
 	<button id="stBtn" onclick="setAnim()">Start</button>
 	<button onclick="setNextLocation()">Step</button>
 
