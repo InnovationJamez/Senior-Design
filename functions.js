@@ -25,7 +25,7 @@ function barrior(x, pol){
 	this.polar = pol;
 }
 
-barrior.prototype.bWidth = 0.05;
+barrior.prototype.bWidth = 0.025;
 
 /*
 	the polar form of the force vector
@@ -275,7 +275,7 @@ function drawBarriors(){
 		var bsWidth = barrior.prototype.bWidth / (ratio * 2);
 		var x1 = item.xPos / ratio - bsWidth + minX;
 		c.beginPath();
-		c.rect(x1, minY, bsWidth, theoHeight / ratio);
+		c.rect(x1, minY, bsWidth * 2, theoHeight / ratio);
 		c.strokeStyle = (item.polar > 0) ? "grey" : "pink";
 		c.stroke();
 		c.fillStyle = (item.polar > 0) ? "grey" : "pink";
