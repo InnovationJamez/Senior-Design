@@ -138,6 +138,22 @@ function rand(min, max){
 	return Math.random() * (max - min) + min;
 }
 
+/* 
+	get random int
+*/
+
+function getRandomInt(min, max) {       
+    // Create byte array and fill with 1 random number
+    var byteArray = new Uint8Array(1);
+    window.crypto.getRandomValues(byteArray);
+
+    var range = max - min + 1;
+    var max_range = 256;
+    if (byteArray[0] >= Math.floor(max_range / range) * range)
+        return getRandomInt(min, max);
+    return min + (byteArray[0] % range);
+}
+
 /*
 	canvas drawing functions and refrcences
 */
@@ -340,7 +356,7 @@ function setAnim(){
 	else{
 		// start the anim
 		anim = setInterval(setNextLocation, 50);
-		anim1 = setInterval(calcSpeed, 100);
+		anim1 = setInterval(calcSpeed, 300);
 		stBtn.innerHTML = "Pause";
 	}
 	// toggle anim state
@@ -354,12 +370,14 @@ function setAnim(){
 	else move the partacle to the new location
 */
 function setNextLocation(){
-	dStart = performance.now();
 	// for each partacle conduct this function
 	ions.forEach(function(item, index) {
+		// calcualte the speed with the time in ms (10 ^ -3 s)
+		xSpeed = (-item.charge * uField + item.speed.xValue) * 0.001;
+		ySpeed = item.speed.yValue * 0.001;
 		// find the next location of the partacle
-		var nextLoc = new rectForm(item.position.xValue + item.speed.xValue, 
-			item.position.yValue + item.speed.yValue);
+		var nextLoc = new rectForm(item.position.xValue + xSpeed, 
+			item.position.yValue + ySpeed);
 		// check if out of bounds or collide with an ion exchange membrane
 		if(nextLoc.xValue + ion.prototype.radias > theoWidth){
 			// cillison with right wall
@@ -404,9 +422,8 @@ function setNextLocation(){
 		item.position.xValue = nextLoc.xValue;
 		item.position.yValue = nextLoc.yValue;
 	});
+	// call the update funciton
 	update();
-	dTime = performance.now() - dStart;
-	c.fillText(dTime.toFixed(2) + "ms", 100, 50);
 }
 
 /* 
@@ -418,8 +435,9 @@ get the time since the last call to control the speed
 function calcSpeed(){
 	// for each ion set thespeed
 	ions.forEach(function(item, index) {
-		item.speed.xValue = (-item.charge * uField + rand(-2, 2)) * (dTime / 1000);
-		item.speed.yValue = rand(-2, 2) * (dTime / 1000);
+		var val = 1.0;
+		item.speed.xValue = getRandomInt(0.0, 1.0) > 0.5 ? -val : val;
+		item.speed.yValue = getRandomInt(0.0, 1.0) > 0.5 ? -val : val;
 	});
 }
 
@@ -507,13 +525,5 @@ function getColor(num){
 			return "red";
 	}
 }
-
-
-
-
-
-
-
-
 
 

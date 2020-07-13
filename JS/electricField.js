@@ -92,11 +92,6 @@ var anim, anim1;
 var state = false;
 
 /*
-	variables for time and step
-*/
-var dTime = 0, dStart = 0;
-
-/*
 	set the values for the sreen ratio and 
 	proportions of the screen
 */
