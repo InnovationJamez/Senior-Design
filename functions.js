@@ -46,6 +46,8 @@ function ion(x, y, c, r){
 	this.position = new rectForm(x, y);
 	// the charge of the ion int -1 or 1
 	this.charge = c;
+	// the speed of the ion
+	this.speed = new rectForm(0,0);
 }
 
 // the radias value shared by all charges
@@ -332,11 +334,13 @@ function setAnim(){
 	else if(state){
 		// stop the animation
 		clearInterval(anim);
+		clearInterval(anim1);
 		stBtn.innerHTML = "Start";
 	}
 	else{
 		// start the anim
 		anim = setInterval(setNextLocation, 50);
+		anim1 = setInterval(calcSpeed, 100);
 		stBtn.innerHTML = "Pause";
 	}
 	// toggle anim state
@@ -350,13 +354,12 @@ function setAnim(){
 	else move the partacle to the new location
 */
 function setNextLocation(){
+	dStart = performance.now();
 	// for each partacle conduct this function
 	ions.forEach(function(item, index) {
-		// calcualte the speed of the partacle
-		var speed = calcSpeed(item);
 		// find the next location of the partacle
-		var nextLoc = new rectForm(item.position.xValue + speed.xValue, 
-			item.position.yValue + speed.yValue);
+		var nextLoc = new rectForm(item.position.xValue + item.speed.xValue, 
+			item.position.yValue + item.speed.yValue);
 		// check if out of bounds or collide with an ion exchange membrane
 		if(nextLoc.xValue + ion.prototype.radias > theoWidth){
 			// cillison with right wall
@@ -397,26 +400,116 @@ function setNextLocation(){
 				nextLoc.xValue = (item.charge < 0) ? xMin - ion.prototype.radias : xMax + ion.prototype.radias;
 			}
 		});
-
-
 		// move the postion of the partacle
 		item.position.xValue = nextLoc.xValue;
 		item.position.yValue = nextLoc.yValue;
 	});
 	update();
+	dTime = performance.now() - dStart;
+	c.fillText(dTime.toFixed(2) + "ms", 100, 50);
 }
 
 /* 
 get the charge and return the speed of the partacle
 have the have some radmom movement with net movement 
 retained
+get the time since the last call to control the speed
 */
-function calcSpeed(ion){
-	var xSpeed = -ion.charge * 0.01 + rand(-0.005, 0.005);
-	var ySpeed = rand(-0.005, 0.005);
-	speed = new rectForm(xSpeed, ySpeed);
-	return speed;
+function calcSpeed(){
+	// for each ion set thespeed
+	ions.forEach(function(item, index) {
+		item.speed.xValue = (-item.charge * uField + rand(-2, 2)) * (dTime / 1000);
+		item.speed.yValue = rand(-2, 2) * (dTime / 1000);
+	});
 }
+
+/* 
+	break up the sections of the field based on the 
+	number of membranes being used
+	find the number of ions in each section
+	dispaly that number above the field
+*/
+function getIonNum(){
+	// for each barrior draw two numbers
+	var len = barNum + 1;
+	// the base x value
+	var wNot = theoWidth / (barNum + 1);
+	// list to store the number of ions in each cell
+	var list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+	// loop through each of the ions and determine is cell location
+	for(var i = 0; i < ions.length; i++){
+		// get the indec of the cell location
+		var loc = getIonPos(ions[i].position.xValue, wNot);
+		// check if the number is valid
+		if(loc != -1){
+			// increment that value by one
+			list[loc]++;
+		}
+	}
+	// loop and draw the numbers
+	for(var i = 0; i < len; i++){
+		var xPos = (i + 0.5) * wNot / ratio + minX;
+		var yPos = -0.05 / ratio + minY;
+		c.font = "30px Arial"; 
+		c.fillStyle = getColor(list[i] / iNum);
+		c.textAlign = "center";
+		c.fillText(list[i], xPos, yPos);
+	}
+}
+
+/*
+	based on the x position of the partacle
+	and the width of each cell find which cell it lies
+	in. how many multaple of the width is grater than the x position 
+	of the ion will give the quadrant it is in.
+*/
+function getIonPos(xPos, cellWidth){
+	// loop until m * cell width > xpos
+	// loop at most 20 times
+	for(var i = 1; i < 20; i++){
+		//console.log(i + " "  + cellWidth + " " + xPos);
+		if(i * cellWidth > xPos){
+			return (i - 1);
+		}
+	}
+	return -1;
+}
+
+/*
+	return a color based on the number of ions
+*/
+function getColor(num){
+	switch(true){
+		case(num < 0.05):
+			return "darkgreen";
+		case(num < 0.10):
+			return "green";
+		case(num < 0.15):
+			return "limegreen";
+		case(num < 0.20):
+			return "greenyellow";
+		case(num < 0.25):
+			return "yellowgreen";
+		case(num < 0.35):
+			return "yellow";
+		case(num < 0.45):
+			return "gold";
+		case(num < 0.50):
+			return "orange";
+		case(num < 0.55):
+			return "darkorange";
+		case(num < 0.60):
+			return "orangered";
+		case(num < 0.65):
+			return "orangered";
+		default:
+			return "red";
+	}
+}
+
+
+
 
 
 

@@ -1,53 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Electric field</title>
-	<style>
-		canvas {
-			border: 1px solid black;
-			background-color: rgb(200, 200, 200);
-		}
-		body{
-			margin: 0px;
-			border: 0px;
-		}
-	</style>
+	<title>Main</title>
 </head>
 <body>
-	<canvas id="can"></canvas><br>
-	
-	<label>Zoom: </label>
-	<input id="scale" type="range" step=0.1 min=1.0 value="1.5" max=5.0>
-	<label id="scaleValue">Value: </label><br>
-
-	<label>Width: </label>
-	<input id="width" value="1.0" type="range" step=0.1 min=0.5 max=4.0>
-	<label id="widthValue">Value: </label><br>
-
-	<label>Height: </label>
-	<input id="height" value="1.0" type="range" step=0.1 min=0.5 max=4.0>
-	<label id="heightValue">Value: </label><br>
-
-	<label>Voltage: </label>
-	<input id="voltage" value="5" type="range" step=0.1 min=0.5 max=20.0>
-	<label id="voltageValue">Value: </label><br>
-
-	<label>Ion number: </label>
-	<input id="ion" value="5" type="range" step=1 min=10 max=200>
-	<label id="ionValue">Value: </label><br>
-
-	<label>Membrane number: </label>
-	<input id="membrane" value="0" type="range" step=1 min=0 max=8>
-	<label id="memValue">Value: </label><br>
-
-	<button id="addBtn">Add Ions</button>
-	<button id="stBtn" onclick="setAnim()">Start</button>
-	<button onclick="setNextLocation()">Step</button>
-
-
-	<script src="functions.js">
-		</script>
-	<script src="electricField.js">
-		</script>
+	<a href="ionSim.html">ION SIMULATOR</a>
 </body>
 </html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Electric field</title>
+	<style>
+		canvas {
+			border: 5px solid black;
+			background-color: rgb(200, 200, 200);
+			margin: 0 auto; display: block;
+		}
+		body{
+			margin: 0px;
+			border: 0px;
+		}
+		div{
+			border: 5px solid black;
+			padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	<a href="index.html">Home</a>
+
+	<!-- the canvas where stuff is drawn -->
+
+	<canvas id="can"></canvas><br>
+
+	<div>
+
+	<!-- Buttons -->
+
+	<h3>Control program</h2>
+
+	<button id="addBtn">Add Ions</button>
+	<button id="stBtn" onclick="setAnim()">Start</button>
+	<button onclick="setNextLocation()">Step</button>
+
+
+	<!-- Range switches -->
+
+	<h3>Change parameters</h2>
+
+	<!-- zoom / scale control Range switch -->
+	
+	<label>Zoom: </label>
+	<input id="scale" type="range" step=0.1 min=1.0 value="1.5" max=5.0>
+	<label id="scaleValue">Value: </label><br>
+
+
+	<!-- width control Range switch -->
+
+	<label>Width: </label>
+	<input id="width" value="1.0" type="range" step=0.1 min=0.5 max=4.0>
+	<label id="widthValue">Value: </label><br>
+
+	<!-- height control Range switch -->
+
+	<label>Height: </label>
+	<input id="height" value="1.0" type="range" step=0.1 min=0.5 max=4.0>
+	<label id="heightValue">Value: </label><br>
+
+	<!-- voltage control Range switch -->
+
+	<label>Voltage: </label>
+	<input id="voltage" value="5" type="range" step=0.1 min=0 max=10.0>
+	<label id="voltageValue">Value: </label><br>
+
+	<!-- ion number control Range switch -->
+
+	<label>Ion number: </label>
+	<input id="ion" value="5" type="range" step=1 min=10 max=200>
+	<label id="ionValue">Value: </label><br>
+
+	<!-- membrane number control Range switch -->
+
+	<label>Membrane number: </label>
+	<input id="membrane" value="0" type="range" step=1 min=0 max=8>
+	<label id="memValue">Value: </label><br>
+
+
+	<!-- Linked external scritps -->
+
+	<script src="functions.js">
+		</script>
+	<script src="electricField.js">
+		</script>
+
+	</div>
+</body>
+</html>

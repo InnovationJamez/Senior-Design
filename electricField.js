@@ -62,7 +62,7 @@ var minY;
 */
 var barriors = [];
 
-var barNum = membrane.value;
+var barNum = parseInt(membrane.value);
 
 /*
 	the voltage drop across the field
@@ -81,13 +81,20 @@ const rad = 0.04;
 var ions = [];
 
 // the number of ions to make
-var iNum = ionHtml.value;
+var iNum = parseInt(ionHtml.value);
 
 // refrnce to repeating anim function
-var anim;
+// anim : set the location of the ions
+// anim1 : set the speed of the ions
+var anim, anim1;
 
 // state of the anim true:play false:pause
 var state = false;
+
+/*
+	variables for time and step
+*/
+var dTime = 0, dStart = 0;
 
 /*
 	set the values for the sreen ratio and 
@@ -133,7 +140,7 @@ function addIons(num){
  function start(){
  	// the height and width of the canvas (px)
 	can.height = window.innerHeight * 0.7;
-	can.width = window.innerWidth * 0.9;
+	can.width = window.innerWidth * 0.95;
 	// set the initial ui values
 	scaleValue.innerHTML = "Value: " + scaleSlider.value;
 	widthValue.innerHTML = "Value: " + width.value + " m";
@@ -155,6 +162,7 @@ function update(){
 	// draw ions
 	drawIons(ions, c);
 	//draw ui text
+	getIonNum();
 	//drawText();
 	// draw the barriors
 	drawBarriors();
@@ -170,6 +178,8 @@ update();
 /*
 	user input and event listeners
 */
+
+// on click listener for the canvas
 
 can.addEventListener("click", function(event){
 	// the actual width of the screen
@@ -192,12 +202,16 @@ can.addEventListener("click", function(event){
 	}
 });
 
+// zoom / scale slider on change listener
+
 scaleSlider.addEventListener("change", function(){
 	// set the value of the html element
 	scaleValue.innerHTML = "Value: " + scaleSlider.value;
 	// update the screen
 	update();
 });
+
+// field width slider on change event listener
 
 width.addEventListener("change", function(){
 	// set the html element
@@ -212,6 +226,8 @@ width.addEventListener("change", function(){
 	update();
 });
 
+// height slider on change function
+
 height.addEventListener("change", function(){
 	// set the height html element
 	heightValue.innerHTML = "Value: " + height.value + " m";
@@ -222,6 +238,8 @@ height.addEventListener("change", function(){
 	// call update function
 	update();
 });
+
+// voltage slider on change function
 
 vInput.addEventListener("change", function(){
 	// set the voltage
@@ -234,6 +252,8 @@ vInput.addEventListener("change", function(){
 	update();
 });
 
+// ion number slider on change funciton
+
 ionHtml.addEventListener("change", function(){
 	// set the voltage
 	iNum = ionHtml.value;
@@ -241,16 +261,20 @@ ionHtml.addEventListener("change", function(){
 	ionValue.innerHTML = "Value: " + iNum + " Ions";
 });
 
+// membrane number on change event listener
+
 membrane.addEventListener("change", function(){
 	// set the voltage
-	barNum = membrane.value;
+	barNum = parseInt(membrane.value);
 	// set the ion value html element
 	memValue.innerHTML = "Value: " + barNum + " Membranes";
 	// add barriors to the field
 	addBarriors(barNum);
 	//update the screen
-	update();
+	update();	
 });
+
+// add button on click listener
 
 document.getElementById("addBtn").addEventListener("click", function(){
 	addIons(iNum);
