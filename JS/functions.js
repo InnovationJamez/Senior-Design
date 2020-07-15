@@ -470,7 +470,7 @@ function getIonNum(){
 		var xPos = (i + 0.5) * wNot / ratio + minX;
 		var yPos = -0.05 / ratio + minY;
 		c.font = "30px Arial"; 
-		c.fillStyle = getColor(list[i] / iNum);
+		c.fillStyle = getColor(list[i]);
 		c.textAlign = "center";
 		c.fillText(list[i], xPos, yPos);
 	}
@@ -498,32 +498,10 @@ function getIonPos(xPos, cellWidth){
 	return a color based on the number of ions
 */
 function getColor(num){
-	switch(true){
-		case(num < 0.05):
-			return "darkgreen";
-		case(num < 0.10):
-			return "green";
-		case(num < 0.15):
-			return "limegreen";
-		case(num < 0.20):
-			return "greenyellow";
-		case(num < 0.25):
-			return "yellowgreen";
-		case(num < 0.35):
-			return "yellow";
-		case(num < 0.45):
-			return "gold";
-		case(num < 0.50):
-			return "orange";
-		case(num < 0.55):
-			return "darkorange";
-		case(num < 0.60):
-			return "orangered";
-		case(num < 0.65):
-			return "orangered";
-		default:
-			return "red";
-	}
+	var multi = 255/50 * num;
+ 	var color = "rgb(" + (multi) + "," + (255 - multi) + ", 0)";
+ 	//console.log(color);
+ 	return color;
 }
 
 
