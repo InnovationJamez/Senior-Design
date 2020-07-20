@@ -465,14 +465,17 @@ function getIonNum(){
 			list[loc]++;
 		}
 	}
+	// get the volume of each cell
+	var cellVol = getVolume() * 1000 / (barNum + 1);
 	// loop and draw the numbers
 	for(var i = 0; i < len; i++){
 		var xPos = (i + 0.5) * wNot / ratio + minX;
 		var yPos = -0.05 / ratio + minY;
-		c.font = "30px Arial"; 
-		c.fillStyle = getColor(list[i]);
+		c.font = "20px Arial"; 
 		c.textAlign = "center";
-		c.fillText(list[i], xPos, yPos);
+		var celNum = (list[i] * 100) * (1 / cellVol);
+		c.fillStyle = getColor(celNum);
+		c.fillText(celNum.toFixed(2), xPos, yPos);
 	}
 }
 
@@ -498,10 +501,25 @@ function getIonPos(xPos, cellWidth){
 	return a color based on the number of ions
 */
 function getColor(num){
-	var multi = 255/50 * num;
+	var multi = (255/1200) * num;
  	var color = "rgb(" + (multi) + "," + (255 - multi) + ", 0)";
- 	//console.log(color);
  	return color;
 }
 
+/*
+	get volume of the tank assuming height of 0.1m
+*/
+function getVolume(){
+	return theoHeight * theoWidth * 0.01;
+}
+
+/*
+	set the volume text on the screen
+*/
+function setVolume(){
+	var s = (getVolume() * 1000) + "L" + " or " + getVolume() + "m^3";
+	c.font = "20px Arial";
+	c.fillStyle = "black";
+	c.fillText(s, 100, 50);
+}
 

@@ -2,14 +2,273 @@
 <html>
 <head>
 	<title>Optimization</title>
+
+	<!-- style sheet -->
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+
+	<!-- math jax formula formatting stuff -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script type="text/javascript" id="MathJax-script" async
+	  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
 </head>
 <body>
+
+	<!-- navigation bar -->
+
+	<ul id="nav">
+		<li><a href="index.html">Home</a></li>
+		<li><a href="ionSim.html">Simulator</a></li>
+		<li><a class="active" href="elecOptimization.html">Calculations</a></li>
+		<li><a href="aboutus.html">About Us</a></li>
+	</ul>
+
+	<!-- content -->
+
+	<h1>Calculations</h1><hr/>
+	<h3>Daily Water Usage</h3>
+	<p>As explained by The US Geological survey, the average person uses about 80-100 gallons of water per day for indoor home use[1]. Enter the number of people in the box bellow and the total water usage will appear next to it.</p>
+	<label>Number of people: </label><input type="number" value="1" step="1" id="numPep" input>
+	<button onclick="calcWater()">Enter</button><br/>
+	<label>Amount of water: </label><label id="waterOut"></label>
+
+	<hr/>
+	<h3>Saltyness of Ocean Water</h3>
+	<p>
+		The concentration of salt in seawater in about 35 parts per throusand, 35 grams per liter or 3.5%[2]. When converted to milligrams per liter the number becomes 35,000 mg per liter. This number is far beyond the safe limit for drinking, agriculture, or livestock. The safe level of salinity for irrigation is 360 mg/L and the safe level for livestock is shown in the cahrt bellow[3].The goal of this electrodialysis solution is to find the parameters that give both eanough water for a population and enough of the salt removed to be used for the three uses mentioned above. 
+	</p>
+
+	<h4>Salinity levels for human consumption</h4>
+	<table>
+		<tr>
+			<th>Salinity (mg/L)</th>
+			<th>Quality</th>
+		</tr>
+		<tr>
+			<td>0-600</td>
+			<td>Good</td>
+		</tr>
+		<tr>
+			<td>600-900</td>
+			<td>Fair</td>
+		</tr>
+		<tr>
+			<td>900-1,200</td>
+			<td>Poor</td>
+		</tr>
+		<tr>
+			<td>>1,200</td>
+			<td>Unappeptable (unpalatable)</td>
+		</tr>
+	</table>
+
+	<h4>Salinity levels for livestock</h4>
+	<table>
+		<tr>
+			<th>Animal</th>
+			<th>recomended salinity for drinking</th>
+		</tr>
+		<tr>
+			<td>poultry</td>
+			<td>2,000 mg/L</td>
+		</tr>
+		<tr>
+			<td>dairy cattle</td>
+			<td>2,400 mg/L</td>
+		</tr>
+		<tr>
+			<td>4,000 mg/L</td>
+			<td>beef cattle, sheep and horses</td>
+		</tr>		
+	</table>
+	<p> Info for both tables comes from The EPA page listed bellow [3]</p>
+
+	<hr>
+	<h3>Calculations</h3>
+	<img src="images/cell_pair_diagram.PNG" width="500"/><br/>
+
+	<span id="form">
+  	$$ 
+  		{&Lambda; U A_{eff}&zeta; \over zFQ&Delta;} =
+		-ln{C_s^{fd} - C_s^{&Delta;} \over C_s^{fc} - C_s^{&Delta;}} +
+		ln{ C_s^{fd} \over C_s^{fc} } + 
+		{&Lambda;(&rho;_A + &rho;_C)C_s^{&Delta;} \over &Delta;}
+  	$$
+  	</span>
+
+
+	<table>
+		<tr>
+			<th>Symbol</th>
+			<th>Parameter</th>
+			<th>Unit</th>
+			<th>Effect on process</th>
+		</tr>
+		<tr>
+			<td>dC<sub>s</sub><sup>&Delta;</sup></td>
+			<td>
+				the concentration difference between
+				the feed solution and the dilute solution.
+			</td>
+			<td>
+				$${keg\over m^2}$$
+			</td>
+			<td>
+				The bigger the concentration difference the more salt that is reomved from the water.
+			</td>
+		</tr>
+		<tr>
+			<td>i</td>
+			<td>Current density</td>
+			<td>$$ { A \over m^2 } $$</td>
+			<td>During operation, the current density should
+				not exceed the limiting current density.</td>
+		</tr>
+		<tr>
+			<td>&zeta;</td>
+			<td>current utilization</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Q</td>
+			<td>producation rate</td>
+			<td>$${m^3\over d}$$</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>A<sub>eff</sub></td>
+			<td>effective membrane area per cell</td>
+			<td>$$ m^2 $$</td>
+			<td></td>
+		</tr>	
+		<tr>
+			<td>k<sub>av</sub></td>
+			<td>average specific electrical con-ductivity of the concentrate and dilute solution in a cell pair,</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>U</td>
+			<td>the applied voltage</td>
+			<td></td>
+			<td></td>
+		</tr>	
+		<tr>
+			<td>N</td>
+			<td>number of cells</td>
+			<td></td>
+			<td></td>
+		</tr>	
+		<tr>
+			<td>&zeta;</td>
+			<td>current utilization</td>
+			<td>unitless</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>&Delta;</td>
+			<td>the thickness of a unit cell</td>
+			<td>m</td>
+			<td>The grater the distance between the cells the less current desnity.</td>
+		</tr>
+		<tr>
+			<td>k<sub>c</sub></td>
+			<td>Electrical conductivity of concentrate</td>
+			<td>$${S \over m}$$</td>
+			<td></td>
+		</tr>	
+		<tr>
+			<td>k<sub>d</sub></td>
+			<td>Electrical conductivity of dilute</td>
+			<td>$${S \over m}$$</td>
+			<td></td>
+		</tr>	
+		<tr>
+			<td>&rho;<sub>A</sub>+&rho;<sub>C</sub></td>
+			<td>Total area resistance of membranes</td>
+			<td>$${ &Omega;m^2 }$$</td>
+			<td>The grater the resistance the lower the effect current and resucing the degree of desalination.</td>
+		</tr>			
+	<table>
+
+	<p>"When constructing an ED plant for brackish
+	water desalination, the composition of the feed is
+	generally fixed and stack dimensions are given
+	by the manufacturer. To achieve a certain product
+	water quality for a given plant capacity, the
+	required total membrane area and the total
+	current must be determined. The required total
+	membrane area is a function of the current
+	density which is determined by the applied
+	voltage and limited by the so-called limiting
+	current density which again is a function of the
+	stack geometry and the feed flow velocity. All
+	the different process parameters are interrelated
+	and must be considered when designing and
+	optimizing an ED plant."[4]</p>
+	<p>"e.g., increasing the flow rate in a
+	given stack design will decrease the residence
+	time of the solutions in the stack and thus reduce
+	the amount of salt ions removed. On the other
+	hand, an increased flow rate allows for a higher
+	current density, which leads to an increase of the
+	ion removal."[4]</p>
+	
+
+
+		
+
+	<h3>Enter vales of control the output of the calculation</h3>
+	<label>Membrane area: </label><input><br/>
+	<label>Current: </label><input><br/>
+	<label>other: </label><input><br/>
+	<label>other: </label><input><br/>
+	<label>other: </label><input><br/>
+
+	<h1>Sources</h1>
+	<p>
+		<ol>
+			<li><a href="https://www.usgs.gov/special-topic/water-science-school/science/water-qa-how-much-water-do-i-use-home-each-day?qt-science_center_objects=0#qt-science_center_objects">USGS: How much water do I use at home each day?</a></li>
+			<li><a href="https://www.usgs.gov/special-topic/water-science-school/science/why-ocean-salty?qt-science_center_objects=0#qt-science_center_objects">USGS: Why is the Ocean Salty?</a></li>
+			<li><a href="https://www.epa.sa.gov.au/environmental_info/water_quality/threats">EPA : Environmental Info Threats</a></li>
+			<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0011916402002084">Designing of an electrodialysis desalination plant</a></li>
+		</ol>
+	</p>
+
+	<!-- Linked external scritps -->
+
+	<script src="JS\elecOptimization.js"></script>
+
+	<!-- navigation bar -->
+
+	<ul id="nav">
+		<li><a href="index.html">Home</a></li>
+		<li><a href="ionSim.html">Simulator</a></li>
+		<li><a class="active" href="elecOptimization.html">Calculations</a></li>
+		<li><a href="aboutus.html">About Us</a></li>
+	</ul>
 
 </body>
 </html>
 
 
+
+
+
+
+
 <!--
+				refrence template dont remove
+				<li><a href="link">Text</a></li>
+
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>	
+
 	need to know 
 	- amount of water per person
 	- safe salinity level
@@ -20,6 +279,8 @@
 	what is needed for the flow rate
 
 	graphing?
+
+	$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
 
 	-----------------------------------------
 	set the salinity per ion

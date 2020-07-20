@@ -141,7 +141,7 @@ function addIons(num){
 	widthValue.innerHTML = "Value: " + width.value + " m";
 	heightValue.innerHTML = "Value: " + height.value + " m";
 	vValue.innerHTML = "Value: " + vInput.value + " V"; 
-	ionValue.innerHTML = "Value: " + ionHtml.value + " Ions";
+	ionValue.innerHTML = "Value: " + (ionHtml.value * 100) + " mg";
 	memValue.innerHTML = "Value: " + barNum + " Membranes";
  }
 
@@ -158,6 +158,7 @@ function update(){
 	drawIons(ions, c);
 	//draw ui text
 	getIonNum();
+	setVolume()
 	//drawText();
 	// draw the barriors
 	drawBarriors();
@@ -253,7 +254,7 @@ ionHtml.addEventListener("change", function(){
 	// set the voltage
 	iNum = ionHtml.value;
 	// set the ion value html element
-	ionValue.innerHTML = "Value: " + iNum + " Ions";
+	ionValue.innerHTML = "Value: " + (iNum * 100) + " mg";
 });
 
 // membrane number on change event listener

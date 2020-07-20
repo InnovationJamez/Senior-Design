@@ -1,0 +1,67 @@
+ul, #nav {
+  	list-style-type: none;
+  	width: auto;
+}
+
+#nav {
+  	height: 50px;
+  	background-color: black;
+}
+
+#nav a {
+	color: white;
+	text-decoration: none;
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+#nav li {
+	float:left;
+	margin-right: 10px;
+}
+
+#nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#nav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+canvas {
+	border: 10px solid black;
+	background-color: rgb(200, 200, 200);
+	margin: 0 auto; display: block;
+}
+
+body{
+	margin: 0px;
+	border: 0px;
+}
+
+div{
+	border: 5px solid black;
+	padding: 10px;
+}
+
+p, h1, h2, h3, h4, a, image, label{
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+  margin: 10px;
+}
+
+#form{
+	font-size: 20px;
+}
