@@ -104,27 +104,3 @@ function cList(a, wa){
 	// answer is correct
 	return true;
 }
-
-/*
-	submitt the users anwers
-*/
-function submitt(){
-	// get values
-	var lName = document.getElementById("lName").value;
-	var fName = document.getElementById("fName").value;
-	var email = document.getElementById("email").value;
-
-	// check user answers
-	if(lName == ""){
-		alert("last name is empty");
-	}
-	else if(fName == ""){
-		alert("first name is empty");
-	}
-	else if(email == ""){
-		alert("email is empty");
-	}
-	else{
-		calcScore();
-	}
-}
