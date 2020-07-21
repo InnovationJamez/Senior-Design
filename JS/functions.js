@@ -257,19 +257,56 @@ function drawIon(ion, c){
 	c.arc(xVal, yVal, rad, 0, 2 * Math.PI);
 	c.fillStyle = (ion.charge > 0) ? "black" : "red";
 	c.fill();
+
 	// draw the plus or minus
 	c.beginPath();
 	c.lineWidth = rad / 5;
 	c.strokeStyle = "white";
-	// vertical line only draw if cation
-	if(ion.charge > 0){
-		c.moveTo(xVal, yVal + rad * 0.8);
-		c.lineTo(xVal, yVal - rad * 0.8);
+
+	if(Math.abs(ion.charge) == 1){
+		// vertical line only draw if cation
+		if(ion.charge > 0){
+			c.moveTo(xVal, yVal + rad * 0.8);
+			c.lineTo(xVal, yVal - rad * 0.8);
+		}
+		// horizontal line
+		c.moveTo(xVal + rad * 0.8, yVal);
+		c.lineTo(xVal - rad * 0.8, yVal);
+		c.stroke();
 	}
-	// horizontal line
-	c.moveTo(xVal + rad * 0.8, yVal);
-	c.lineTo(xVal - rad * 0.8, yVal);
-	c.stroke();
+	else if(Math.abs(ion.charge) == 2){
+		// plus dim
+		var len = rad / 3;
+		// plus center
+		var x = xVal + rad / 3;
+		var y = yVal + rad / 3;
+		// first plus
+		c.moveTo(x - len, y);
+		c.lineTo(x + len, y);
+		// if + make verical line
+		if(ion.charge > 0){
+			c.moveTo(x, y - len);
+			c.lineTo(x, y + len);
+			c.stroke();
+		}
+		// set new center
+		x = xVal - rad / 3;
+		y = yVal - rad / 3;
+		// draw new plus
+		c.moveTo(x - len, y);
+		c.lineTo(x + len, y);
+		// if + make verical line
+		if(ion.charge > 0){
+			c.moveTo(x, y - len);
+			c.lineTo(x, y + len);
+		}
+		c.stroke();		
+	}
+	else{
+		//fdsa
+		c.fillText("E", xVal, yVal);
+		c.strke()
+	}
 }
 
 /*
@@ -370,6 +407,8 @@ function setAnim(){
 	else move the partacle to the new location
 */
 function setNextLocation(){
+	// check if mono valent or divalent
+	var dia = (document.getElementById("diRadio").checked);
 	// for each partacle conduct this function
 	ions.forEach(function(item, index) {
 		// calcualte the speed with the time in ms (10 ^ -3 s)
@@ -400,6 +439,10 @@ function setNextLocation(){
 			var xMax = bItem.xPos + barrior.prototype.bWidth / 2;
 	
 			if(item.charge == bItem.polar){
+				// pass
+			}
+			// if divalent and same polarity
+			else if(dia && item.charge == bItem.polar * 2){
 				// pass
 			}
 			// right side collision
@@ -480,7 +523,7 @@ function getIonNum(){
 		c.font = "20px Arial"; 
 		c.textAlign = "center";
 		// set the number
-		var celNum = (list[i] * 100) * (1 / cellVol);
+		var celNum = list[i] * (1 / cellVol);
 		// set the color of the text
 		c.fillStyle = "black";
 		// set the label on screen
@@ -523,7 +566,7 @@ function getIonPos(xPos, cellWidth){
 	return a color based on the number of ions
 */
 function getColor(num){
-	var multi = (255/1200) * num;
+	var multi = (255/1.2) * num;
  	var color = "rgb(" + (multi) + "," + (255 - multi) + ", 0)";
  	return color;
 }

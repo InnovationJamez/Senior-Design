@@ -45,10 +45,20 @@ var sIonHtml = document.getElementById("sIonHtml");
 // get html element for ion value soduim 
 var sIonValue = document.getElementById("sIonValue");
 
+// input for setting the number of magnesium ions
+var mIonHtml = document.getElementById("mIonHtml");
+// get html element for ion value magnesium 
+var mIonValue = document.getElementById("mIonValue");
+
 // input for setting the number of ions chloride 
 var cIonHtml = document.getElementById("cIonHtml");
 // get html element for ion value chloride
 var cIonValue = document.getElementById("cIonValue");
+
+// input for setting the number of ions carbonate 
+var c1IonHtml = document.getElementById("c1IonHtml");
+// get html element for ion value carbonate
+var c1IonValue = document.getElementById("c1IonValue");
 
 // ratio from thoeretical to pixels
 // the one pixel is x metets
@@ -92,6 +102,8 @@ var ions = [];
 // the number of ions to make
 var sNum = parseInt(sIonHtml.value);
 var cNum = parseInt(cIonHtml.value);
+var mNum = parseInt(mIonHtml.value);
+var c1Num = parseInt(c1IonHtml.value);
 
 // refrnce to repeating anim function
 // anim : set the location of the ions
@@ -147,8 +159,10 @@ function addIons(num, pol){
 	heightValue.innerHTML = "Value: " + height.value + " m";
 	vValue.innerHTML = "Value: " + vInput.value + " V"; 
 	// ion set text
-	sIonValue.innerHTML = "Mass: " + (sIonHtml.value * 100) + " mg";
-	cIonValue.innerHTML = "Mass: " + (cIonHtml.value * 100) + " mg";
+	sIonValue.innerHTML = "Mass: " + sIonHtml.value + " g";
+	cIonValue.innerHTML = "Mass: " + cIonHtml.value + " g";
+	mIonValue.innerHTML = "Mass: " + mIonHtml.value + " g";
+	c1IonValue.innerHTML = "Mass: " + c1IonHtml.value + " g";
 	// mem numb set text
 	memValue.innerHTML = "Value: " + barNum + " Membranes";
  }
@@ -262,7 +276,7 @@ sIonHtml.addEventListener("change", function(){
 	// set the voltage
 	sNum = sIonHtml.value;
 	// set the ion value html element
-	sIonValue.innerHTML = "Mass: " + (sNum * 100) + " mg";
+	sIonValue.innerHTML = "Mass: " + sNum + " g";
 });
 
 // chloride ion number slider on change funciton
@@ -271,7 +285,25 @@ cIonHtml.addEventListener("change", function(){
 	// set the voltage
 	cNum = cIonHtml.value;
 	// set the ion value html element
-	cIonValue.innerHTML = "Mass: " + (cNum * 100) + " mg";
+	cIonValue.innerHTML = "Mass: " + cNum + " g";
+});
+
+// magnesium ion number slider on change funciton
+
+mIonHtml.addEventListener("change", function(){
+	// set the voltage
+	mNum = mIonHtml.value;
+	// set the ion value html element
+	mIonValue.innerHTML = "Mass: " + mNum + " g";
+});
+
+// carbonate ion number slider on change funciton
+
+c1IonHtml.addEventListener("change", function(){
+	// set the voltage
+	c1Num = c1IonHtml.value;
+	// set the ion value html element
+	c1IonValue.innerHTML = "Mass: " + c1Num + " g";
 });
 
 // membrane number on change event listener
@@ -292,8 +324,15 @@ membrane.addEventListener("change", function(){
 document.getElementById("addBtn").addEventListener("click", function(){
 	// crear the curent ions
 	ions = [];
+	// sodium
 	addIons(sNum, 1);
+	// chloride
 	addIons(cNum, -1);
+	// magnesium
+	addIons(mNum, 2);
+	// carbonate
+	addIons(c1Num, -2);
+	// update
 	update();
 });
 

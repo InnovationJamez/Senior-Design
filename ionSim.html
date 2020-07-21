@@ -97,23 +97,40 @@
 				<input id="voltage" value="2.5" type="range" step=0.1 min=0 max=5.0>
 				<label id="voltageValue">Value: </label><br>
 
-				<!-- ion number control Range switch -->
+				<!-- sodium ion number control Range switch -->
 
 				<label>Sodium(NA+): </label>
 				<input id="sIonHtml" value="10" type="range" step=1 min=10 max=250>
 				<label id="sIonValue">Value: </label><br>
 
-				<!-- ion number control Range switch -->
+				<!-- chloride ion number control Range switch -->
 
 				<label>Chloride(Cl-): </label>
 				<input id="cIonHtml" value="10" type="range" step=1 min=10 max=250>
 				<label id="cIonValue">Value: </label><br>	
+
+				<!-- Magenesium ion number control Range switch -->
+
+				<label>Magenesium(Mg^2+): </label>
+				<input id="mIonHtml" value="10" type="range" step=1 min=10 max=250>
+				<label id="mIonValue">Value: </label><br>
+
+				<!-- Carbonate ion number control Range switch -->
+
+				<label>Carbnonate(CO3^2-): </label>
+				<input id="c1IonHtml" value="10" type="range" step=1 min=10 max=250>
+				<label id="c1IonValue">Value: </label><br>
 
 				<!-- membrane number control Range switch -->
 
 				<label>Membrane number: </label>
 				<input id="membrane" value="0" type="range" step=1 min=0 max=8>
 				<label id="memValue">Value: </label><br>
+
+				<!-- type of membrane -->
+				<label>Type of mem</label>
+				<input checked type="radio" name="type"><label>Monovalent</label>
+				<input type="radio" name="type" id="diRadio"><label>Divalent</label>
 				<br><br><br><br><br><br><br><br><br><br>
 				<br><br><br><br><br><br>
 			</th>
@@ -126,7 +143,7 @@
 				<table id="tal">
 					<tr>
 						<th>Area Letter</th>
-						<th>Salt concentration (mg/L)</th>
+						<th>Salt concentration (g/L)</th>
 					</tr>
 					<tr>
 						<td>A</td>
@@ -169,6 +186,13 @@
 		</tr>
 	</table>
 
+	<!--
+		Varieties of these basic types of membranes exist that are selective to ions that 
+		are either monovalent (having a charge magnitude of 1) or divalent (having a charge 
+		magnitude of 2). Other types can be formulated to enhance the passage rates of 
+		selected ions. For example, membranes exist that show an affinity for nitrate passage 
+		over other anions. 
+	-->
 
 	<!-- Linked external scritps -->
 
