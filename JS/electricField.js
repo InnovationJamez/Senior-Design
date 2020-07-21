@@ -31,15 +31,24 @@ var vInput = document.getElementById("voltage");
 // get html element for voltage value
 var vValue = document.getElementById("voltageValue");
 
-// input for setting the number of ions
-var ionHtml = document.getElementById("ion");
-// get html element for ion value
-var ionValue = document.getElementById("ionValue");
-
 // input for setting the number of membranes
 var membrane = document.getElementById("membrane");
 // get html element for membrane value
 var memValue = document.getElementById("memValue");
+
+/*
+	values for setting ion numbers
+*/
+
+// input for setting the number of sodium ions
+var sIonHtml = document.getElementById("sIonHtml");
+// get html element for ion value soduim 
+var sIonValue = document.getElementById("sIonValue");
+
+// input for setting the number of ions chloride 
+var cIonHtml = document.getElementById("cIonHtml");
+// get html element for ion value chloride
+var cIonValue = document.getElementById("cIonValue");
 
 // ratio from thoeretical to pixels
 // the one pixel is x metets
@@ -81,7 +90,8 @@ const rad = 0.04;
 var ions = [];
 
 // the number of ions to make
-var iNum = parseInt(ionHtml.value);
+var sNum = parseInt(sIonHtml.value);
+var cNum = parseInt(cIonHtml.value);
 
 // refrnce to repeating anim function
 // anim : set the location of the ions
@@ -111,9 +121,7 @@ function setValues(scale){
 /*
 	add ions to the field
 */
-function addIons(num){
-	// crear the curent ions
-	ions = [];
+function addIons(num, pol){
 	// edge buffer
 	var b = rad;
 	// for each num add ion
@@ -121,12 +129,9 @@ function addIons(num){
 		//the x value that will be used
 		var x = rand(b, theoWidth - b);
 		var y = rand(b, theoHeight - b);
-		// set the charge of the partacle
-		var charge = (Math.random(0,1) > 0.5) ? -1 : 1;
 		// add the ion
-		ions.push(new ion(x, y, charge));
+		ions.push(new ion(x, y, pol));
 	}
-	update();
 }
 
 /*
@@ -141,7 +146,10 @@ function addIons(num){
 	widthValue.innerHTML = "Value: " + width.value + " m";
 	heightValue.innerHTML = "Value: " + height.value + " m";
 	vValue.innerHTML = "Value: " + vInput.value + " V"; 
-	ionValue.innerHTML = "Value: " + (ionHtml.value * 100) + " mg";
+	// ion set text
+	sIonValue.innerHTML = "Mass: " + (sIonHtml.value * 100) + " mg";
+	cIonValue.innerHTML = "Mass: " + (cIonHtml.value * 100) + " mg";
+	// mem numb set text
 	memValue.innerHTML = "Value: " + barNum + " Membranes";
  }
 
@@ -248,13 +256,22 @@ vInput.addEventListener("change", function(){
 	update();
 });
 
-// ion number slider on change funciton
+// sodium ion number slider on change funciton
 
-ionHtml.addEventListener("change", function(){
+sIonHtml.addEventListener("change", function(){
 	// set the voltage
-	iNum = ionHtml.value;
+	sNum = sIonHtml.value;
 	// set the ion value html element
-	ionValue.innerHTML = "Value: " + (iNum * 100) + " mg";
+	sIonValue.innerHTML = "Mass: " + (sNum * 100) + " mg";
+});
+
+// chloride ion number slider on change funciton
+
+cIonHtml.addEventListener("change", function(){
+	// set the voltage
+	cNum = cIonHtml.value;
+	// set the ion value html element
+	cIonValue.innerHTML = "Mass: " + (cNum * 100) + " mg";
 });
 
 // membrane number on change event listener
@@ -273,6 +290,10 @@ membrane.addEventListener("change", function(){
 // add button on click listener
 
 document.getElementById("addBtn").addEventListener("click", function(){
-	addIons(iNum);
+	// crear the curent ions
+	ions = [];
+	addIons(sNum, 1);
+	addIons(cNum, -1);
+	update();
 });
 

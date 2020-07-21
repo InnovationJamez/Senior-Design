@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Knowledge Test</title>
+	<!-- style sheet -->
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<style>
+		#div1, #div2 {
+			height: 300px;
+		}
+		#div3, #div4 {
+			height: 450px;
+		}
+		#div1, #div2, #div3, #div4{
+		  	margin: 10px;
+		  	padding: 10px;
+		  	border: 1px solid black;	
+		  	width: 400px;		
+		} 
+		.mov{
+			border: 1px solid grey;
+			text-align: center;
+			background-color: grey;
+		}
+		label{
+			margin-left:30px;
+		}
+		input{
+			margin-bottom: 10px;
+		}
+		.MathJax_Display {
+		  text-align: left !important;
+		}
+		div{
+			margin-bottom: 10px;
+			border:1px solid black;
+		}
+	</style>
+
+	<!-- math jax formula formatting stuff -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script type="text/javascript" id="MathJax-script" async
+	  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+</head>
+<body>
+	<!-- navigation bar -->
+	<ul id="nav">
+		<li><a href="index.html">Home</a></li>
+		<li><a href="ionSim.html">Simulator</a></li>
+		<li><a href="elecOptimization.html">Water Info</a></li>
+		<li><a class="active" href="knowledgeTest.html">Knowledge Test</a></li>
+		<li><a href="aboutus.html">About Us</a></li>
+	</ul>
+
+	<!-- question one -->
+
+	<h1>Knowledge Test</h1>
+
+	<h3>Instructions</h3>
+
+	<ol>
+		<li>Read the prior web pages and learn the material</li>
+		<li>Anser all the questions of the best of your ablility</li>
+		<li>Enter your name, and email</li>
+		<li>Once you hit the enter button you will get your score</li>
+	</ol>
+
+	<hr>
+
+	<h3>Question one</h3>
+
+	<p>Given the following desalination cell and membrane pairs which of the spaces will be desalianted and which will be desalinated. </p>
+
+	<img src="images/test4.png" height="200"/><br/>
+
+	<table>
+		<tr>
+			<th>Desalinated</th>
+			<th>Hypersaline</th>
+		</tr>
+		<tr>
+			<td>
+				<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag1" class="mov">A</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag2" class="mov">B</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag3" class="mov">C</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag4" class="mov">D</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag13" class="mov">E</h1>
+				</div>			
+			</td>
+			<td>
+				<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<hr>
+
+	<h3>Question two</h3>
+
+	<p>What is the concentration of sea water</p>
+
+	<input type="radio" name="conc" id="conc1">
+	<label>35g/L</label><br>
+	<input type="radio" name="conc" id="conc2">
+	<label>30g/L</label><br>
+	<input type="radio" name="conc" id="conc3">
+	<label>30g/L</label><br>
+	<input type="radio" name="conc" id="conc4">
+	<label>20g/L</label><br>
+
+
+	<hr>
+
+	<h3>Question three</h3>
+
+	<p>What is the highest amount of salinity for "Good"</p>
+
+	<input type="radio" name="good" id="good1">
+	<label>450mg/L</label><br>
+	<input type="radio" name="good" id="good2">
+	<label>650mg/L</label><br>
+	<input type="radio" name="good" id="goodc3">
+	<label>550mg/L</label><br>
+	<input type="radio" name="good" id="goodc4">
+	<label>600mg/L</label><br>
+
+	<hr>
+
+	<h3>Question four</h3>
+
+	<p>Which is the formula for sodium</p>
+
+	<div>
+		<input type="radio" name="form" id="form1">
+		$$ Na^{+} $$	
+	</div>
+
+	<div>
+		<input type="radio" name="form" id="form2">
+		<label>$$ Cl^{-} $$</label>
+	</div>
+
+	<div>
+		<input type="radio" name="form" id="form3">
+		<label>$$ Br^{-} $$</label>
+	</div>
+
+	<div>
+		<input type="radio" name="form" id="form4">
+		<label>$$ F^- $$</label>
+	</div>
+
+	<hr>
+
+	<h3>Question five</h3>
+
+	<p>Given the following desalination cell and membrane pairs which of the spaces will be desalianted and which will be desalinated. </p>
+
+	<img src="images/test2.png" height="200"/><br/>
+
+	<table>
+		<tr>
+			<th>Desalinated</th>
+			<th>Hypersaline</th>
+		</tr>
+		<tr>
+			<td>
+				<div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)">
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag5" class="mov">A</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag6" class="mov">B</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag7" class="mov">C</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag8" class="mov">D</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag9" class="mov">E</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag10" class="mov">F</h1>
+			  		<h1 draggable="true" ondragstart="drag(event)" id="drag11" class="mov">G</h1>
+				</div>			
+			</td>
+			<td>
+				<div id="div4" ondrop="drop(event)" ondragover="allowDrop(event)">
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<hr>
+
+	<h3>please type name & email, and then click the submitt button</h3>
+
+	<label>Last Name: </label><input id="lName"><br>
+	<label>First Name: </label><input id="fName"><br>
+	<label>Email: </label><input id="email"><br>
+	<button onclick="submitt()">Enter</button>
+
+	<!-- script -->
+	<script src="JS/knowledgeTest.js"></script>
+
+</body>
+</html>

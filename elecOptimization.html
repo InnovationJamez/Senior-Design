@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Optimization</title>
+	<title>Water facts</title>
 
 	<!-- style sheet -->
 	<link rel="stylesheet" type="text/css" href="css/main.css"/>
@@ -11,6 +11,16 @@
 	<script type="text/javascript" id="MathJax-script" async
 	  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
+
+	<!-- page specific safety -->
+	<style type="text/css">
+		table, th, td {
+		  border: 1px solid black;
+		  border-collapse: collapse;
+		  padding: 10px;
+		  margin: 10px;
+		}
+	</style>
 </head>
 <body>
 
@@ -19,24 +29,29 @@
 	<ul id="nav">
 		<li><a href="index.html">Home</a></li>
 		<li><a href="ionSim.html">Simulator</a></li>
-		<li><a class="active" href="elecOptimization.html">Calculations</a></li>
+		<li><a class="active" href="elecOptimization.html">Water Info</a></li>
+		<li><a href="knowledgeTest.html">Knowledge Test</a></li>
 		<li><a href="aboutus.html">About Us</a></li>
 	</ul>
 
 	<!-- content -->
 
-	<h1>Calculations</h1><hr/>
-	<h3>Daily Water Usage</h3>
+	<h1>Water info</h1><hr/>
+	<h2>Daily Water Usage</h2>
 	<p>As explained by The US Geological survey, the average person uses about 80-100 gallons of water per day for indoor home use[1]. Enter the number of people in the box bellow and the total water usage will appear next to it.</p>
 	<label>Number of people: </label><input type="number" value="1" step="1" id="numPep" input>
 	<button onclick="calcWater()">Enter</button><br/>
 	<label>Amount of water: </label><label id="waterOut"></label>
 
 	<hr/>
-	<h3>Saltyness of Ocean Water</h3>
+	<h2>Saltyness of Ocean Water</h2>
 	<p>
-		The concentration of salt in seawater in about 35 parts per throusand, 35 grams per liter or 3.5%[2]. When converted to milligrams per liter the number becomes 35,000 mg per liter. This number is far beyond the safe limit for drinking, agriculture, or livestock. The safe level of salinity for irrigation is 360 mg/L and the safe level for livestock is shown in the cahrt bellow[3].The goal of this electrodialysis solution is to find the parameters that give both eanough water for a population and enough of the salt removed to be used for the three uses mentioned above. 
+		The concentdation of salt in seawater in about 35 parts per throusand, 35 grams per liter or 3.5%[2]. When converted to milligrams per liter the number becomes 35,000 mg per liter. This number is far beyond the safe limit for drinking, agriculture, or livestock. The safe level of salinity for irrigation is 360 mg/L and the safe level for livestock is shown in the cahrt bellow[3].The goal of this electdodialysis solution is to find the parameters that give both eanough water for a population and enough of the salt removed to be used for the three uses mentioned above. 
 	</p>
+
+	<hr><h2>Ocean water breakdown</h2>
+
+	<hr><h2>Safe Levels</h2>
 
 	<h4>Salinity levels for human consumption</h4>
 	<table>
@@ -69,7 +84,7 @@
 			<th>recomended salinity for drinking</th>
 		</tr>
 		<tr>
-			<td>poultry</td>
+			<td>poultdy</td>
 			<td>2,000 mg/L</td>
 		</tr>
 		<tr>
@@ -83,6 +98,112 @@
 	</table>
 	<p> Info for both tables comes from The EPA page listed bellow [3]</p>
 
+	<hr><h2>Break down of ocean water</h2>
+
+	<table>
+		<tr>
+			<th>Reference Composition</th>
+			<th>name</th>
+			<th>$$ mmol kg^{-1} $$</th>
+			<th>$$ mg kg^{-1} $$</th>
+		</td>
+		<tr>
+			<td>$$ Na^{+} $$</td>
+			<td>Sodium</td>
+			<td>468.9675</td>
+			<td>10781.45</td>
+		</td>
+		<tr>
+			<td>$$ Mg^{2+} $$</td>
+			<td>Magnesium</td>
+			<td>52.8170</td>
+			<td>1283.72</td>
+		</td>
+		<tr>
+			<td>$$ Ca^{2+} $$</td>
+			<td>Calcium</td>
+			<td>10.2820</td>
+			<td>412.08</td>
+		</td>
+		<tr>
+			<td>$$ k^{+} $$</td>
+			<td>Potassium</td>
+			<td>10.2077</td>
+			<td>399.10</td>
+		</tr>
+		<tr>
+			<td>$$ Sr^{2+} $$</td>
+			<td>Strontuim</td>
+			<td>0.0907</td>
+			<td>7.94</td>
+		</td>
+		<tr>
+			<td>$$ Cl^{-} $$</td>
+			<td>Chloride</td>
+			<td>545.8695</td>
+			<td>19352.71</td>
+		</tr>
+		<tr>
+			<td>$$ SO_4^{2-} $$</td>
+			<td>Sulfate</td>
+			<td>28.2353</td>
+			<td>2712.35</td>
+		</tr>
+		<tr>
+			<td>$$ HCO_3^{-} $$</td>
+			<td>Bicarbonate</td>
+			<td>1.7178</td>
+			<td>104.81</td>
+		</tr>
+		<tr>
+			<td>$$ Br^{-} $$</td>
+			<td>Bromide</td>
+			<td>0.8421</td>
+			<td>67.29</td>
+		</tr>
+		<tr>
+			<td>$$ B(OH)_3 $$</td>
+			<td>Boric acid</td>
+			<td>0.3143</td>
+			<td>19.43</td>
+		</tr>
+		<tr>
+			<td>$$ CO_3^{2-} $$</td>
+			<td>Carbonate</td>
+			<td>0.2389</td>
+			<td>14.34</td>
+		</tr>
+		<tr>
+			<td>$$ B(OH)_4^- $$</td>
+			<td>Tetrahydroxyborate</td>
+			<td>0.1008</td>
+			<td>7.94</td>
+		</tr>
+		<tr>
+			<td>$$ F^- $$</td>
+			<td>Fluoride</td>
+			<td>0.0683</td>
+			<td>1.30</td>
+		</tr>
+		<tr>
+			<td>$$ CO_2 $$</td>
+			<td>Carbon dioxide</td>
+			<td>0.0097</td>
+			<td>0.43</td>
+		</tr>
+		<tr>
+			<td>$$ OH^- $$</td>
+			<td>Hydroxide</td>
+			<td>0.0080</td>
+			<td>0.14</td>
+		</tr>
+	</table>
+
+	<p>Info for this chart comes from Electrical Properties of Sea Water: Theory and Applications [5]</p>
+
+	<hr>
+
+	<!--
 	<hr>
 	<h3>Calculations</h3>
 	<img src="images/cell_pair_diagram.PNG" width="500"/><br/>
@@ -98,133 +219,107 @@
 
 
 	<table>
-		<tr>
+		<td>
 			<th>Symbol</th>
 			<th>Parameter</th>
 			<th>Unit</th>
 			<th>Effect on process</th>
-		</tr>
-		<tr>
+		</td>
+		<td>
 			<td>dC<sub>s</sub><sup>&Delta;</sup></td>
 			<td>
-				the concentration difference between
+				the concentdation difference between
 				the feed solution and the dilute solution.
 			</td>
 			<td>
 				$${keg\over m^2}$$
 			</td>
 			<td>
-				The bigger the concentration difference the more salt that is reomved from the water.
+				The bigger the concentdation difference the more salt that is reomved from the water.
 			</td>
-		</tr>
-		<tr>
+		</td>
+		<td>
 			<td>i</td>
 			<td>Current density</td>
 			<td>$$ { A \over m^2 } $$</td>
 			<td>During operation, the current density should
 				not exceed the limiting current density.</td>
-		</tr>
-		<tr>
+		</td>
+		<td>
 			<td>&zeta;</td>
 			<td>current utilization</td>
 			<td></td>
 			<td></td>
-		</tr>
-		<tr>
+		</td>
+		<td>
 			<td>Q</td>
 			<td>producation rate</td>
 			<td>$${m^3\over d}$$</td>
 			<td></td>
-		</tr>
-		<tr>
+		</td>
+		<td>
 			<td>A<sub>eff</sub></td>
 			<td>effective membrane area per cell</td>
 			<td>$$ m^2 $$</td>
 			<td></td>
-		</tr>	
-		<tr>
+		</td>	
+		<td>
 			<td>k<sub>av</sub></td>
-			<td>average specific electrical con-ductivity of the concentrate and dilute solution in a cell pair,</td>
+			<td>average specific electdical con-ductivity of the concentdate and dilute solution in a cell pair,</td>
 			<td></td>
 			<td></td>
-		</tr>
-		<tr>
+		</td>
+		<td>
 			<td>U</td>
 			<td>the applied voltage</td>
 			<td></td>
 			<td></td>
-		</tr>	
-		<tr>
+		</td>	
+		<td>
 			<td>N</td>
 			<td>number of cells</td>
 			<td></td>
 			<td></td>
-		</tr>	
-		<tr>
+		</td>	
+		<td>
 			<td>&zeta;</td>
 			<td>current utilization</td>
 			<td>unitless</td>
 			<td></td>
-		</tr>
-		<tr>
+		</td>
+		<td>
 			<td>&Delta;</td>
 			<td>the thickness of a unit cell</td>
 			<td>m</td>
 			<td>The grater the distance between the cells the less current desnity.</td>
-		</tr>
-		<tr>
+		</td>
+		<td>
 			<td>k<sub>c</sub></td>
-			<td>Electrical conductivity of concentrate</td>
+			<td>Electdical conductivity of concentdate</td>
 			<td>$${S \over m}$$</td>
 			<td></td>
-		</tr>	
-		<tr>
+		</td>	
+		<td>
 			<td>k<sub>d</sub></td>
-			<td>Electrical conductivity of dilute</td>
+			<td>Electdical conductivity of dilute</td>
 			<td>$${S \over m}$$</td>
 			<td></td>
-		</tr>	
-		<tr>
+		</td>	
+		<td>
 			<td>&rho;<sub>A</sub>+&rho;<sub>C</sub></td>
 			<td>Total area resistance of membranes</td>
 			<td>$${ &Omega;m^2 }$$</td>
 			<td>The grater the resistance the lower the effect current and resucing the degree of desalination.</td>
-		</tr>			
+		</td>			
 	<table>
 
-	<p>"When constructing an ED plant for brackish
-	water desalination, the composition of the feed is
-	generally fixed and stack dimensions are given
-	by the manufacturer. To achieve a certain product
-	water quality for a given plant capacity, the
-	required total membrane area and the total
-	current must be determined. The required total
-	membrane area is a function of the current
-	density which is determined by the applied
-	voltage and limited by the so-called limiting
-	current density which again is a function of the
-	stack geometry and the feed flow velocity. All
-	the different process parameters are interrelated
-	and must be considered when designing and
-	optimizing an ED plant."[4]</p>
-	<p>"e.g., increasing the flow rate in a
-	given stack design will decrease the residence
-	time of the solutions in the stack and thus reduce
-	the amount of salt ions removed. On the other
-	hand, an increased flow rate allows for a higher
-	current density, which leads to an increase of the
-	ion removal."[4]</p>
-	
-
-
-		
-
-	<h3>Enter vales of control the output of the calculation</h3>
+	<h3>Enter vales of contdol the output of the calculation</h3>
 	<label>Membrane area: </label><input><br/>
 	<label>Current: </label><input><br/>
 	<label>other: </label><input><br/>
 	<label>other: </label><input><br/>
 	<label>other: </label><input><br/>
+	-->
 
 	<h1>Sources</h1>
 	<p>
@@ -232,9 +327,12 @@
 			<li><a href="https://www.usgs.gov/special-topic/water-science-school/science/water-qa-how-much-water-do-i-use-home-each-day?qt-science_center_objects=0#qt-science_center_objects">USGS: How much water do I use at home each day?</a></li>
 			<li><a href="https://www.usgs.gov/special-topic/water-science-school/science/why-ocean-salty?qt-science_center_objects=0#qt-science_center_objects">USGS: Why is the Ocean Salty?</a></li>
 			<li><a href="https://www.epa.sa.gov.au/environmental_info/water_quality/threats">EPA : Environmental Info Threats</a></li>
-			<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0011916402002084">Designing of an electrodialysis desalination plant</a></li>
+			<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0011916402002084">Designing of an electdodialysis desalination plant</a></li>
+			<li><a href="https://search-credoreference-com.ezproxywit.flo.org/content/entdy/estocean/electdical_properties_of_sea_water_theory_and_applications/0">Electdical Properties of Sea Water: Theory and Applications</a></li>
 		</ol>
 	</p>
+
+
 
 	<!-- Linked external scritps -->
 
@@ -245,29 +343,23 @@
 	<ul id="nav">
 		<li><a href="index.html">Home</a></li>
 		<li><a href="ionSim.html">Simulator</a></li>
-		<li><a class="active" href="elecOptimization.html">Calculations</a></li>
+		<li><a class="active" href="elecOptimization.html">Water Info</a></li>
+		<li><a href="knowledgeTest.html">Knowledge Test</a></li>
 		<li><a href="aboutus.html">About Us</a></li>
 	</ul>
-
 </body>
 </html>
-
-
-
-
-
-
 
 <!--
 				refrence template dont remove
 				<li><a href="link">Text</a></li>
 
-		<tr>
+		<td>
 			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>
-		</tr>	
+		</td>	
 
 	need to know 
 	- amount of water per person
@@ -284,7 +376,7 @@
 
 	-----------------------------------------
 	set the salinity per ion
-	get concentration as number of ions over the area of cell
+	get concentdation as number of ions over the area of cell
 
 	From Alborz, Nakisa to Everyone:  03:14 PM
 	
@@ -303,7 +395,7 @@
 	
 	https://www.watercorporation.com.au/Our-water/Desalination#:~:text=Seawater%20desalination%20is%20the%20removal,use%20a%20reverse%20osmosis%20process.&text=The%20filtered%20seawater%20is%20then,occurs%20in%20nature%20is%20reversed.
 	
-	https://www.cdc.gov/healthywater/drinking/travel/backcountry_water_treatment.html
+	https://www.cdc.gov/healthywater/drinking/tdavel/backcountdy_water_tdeatment.html
 	
 	https://www.usgs.gov/special-topic/water-science-school/science/water-qa-how-much-water-do-i-use-home-each-day?qt-science_center_objects=0#qt-science_center_objects
 -->

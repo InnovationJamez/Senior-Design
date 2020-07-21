@@ -448,6 +448,10 @@ function calcSpeed(){
 	dispaly that number above the field
 */
 function getIonNum(){
+	// letters to be drawn for labeling
+	var alpha = ['A','B','C','D','E','F','G','H','I','J'];
+	// html tags for the table elements to be edited
+	var tabHtml = ["t1","t2","t3","t4","t5","t6","t7","t8","t9"];
 	// for each barrior draw two numbers
 	var len = barNum + 1;
 	// the base x value
@@ -469,13 +473,31 @@ function getIonNum(){
 	var cellVol = getVolume() * 1000 / (barNum + 1);
 	// loop and draw the numbers
 	for(var i = 0; i < len; i++){
+		// set the position of the text
 		var xPos = (i + 0.5) * wNot / ratio + minX;
 		var yPos = -0.05 / ratio + minY;
+		// set the characteristics of the text
 		c.font = "20px Arial"; 
 		c.textAlign = "center";
+		// set the number
 		var celNum = (list[i] * 100) * (1 / cellVol);
-		c.fillStyle = getColor(celNum);
-		c.fillText(celNum.toFixed(2), xPos, yPos);
+		// set the color of the text
+		c.fillStyle = "black";
+		// set the label on screen
+		c.fillText(alpha[i], xPos, yPos);
+		// set the value of the table
+		var t = document.getElementById(tabHtml[i])
+		t.innerHTML = celNum.toFixed(2);
+		// set color of table text
+		t.style.color = getColor(celNum);
+	}
+	// set the other html table elements to null
+	var len1 = tabHtml.length;
+	for(var i = len; i < len1; i++){
+		// set the value of the table
+		var t = document.getElementById(tabHtml[i]);
+		t.style.color = "black";
+		t.innerHTML = "null";
 	}
 }
 
@@ -517,9 +539,8 @@ function getVolume(){
 	set the volume text on the screen
 */
 function setVolume(){
-	var s = (getVolume() * 1000) + "L" + " or " + getVolume() + "m^3";
-	c.font = "20px Arial";
-	c.fillStyle = "black";
-	c.fillText(s, 100, 50);
+	var v = (getVolume() * 1000).toFixed(2) + "L" + " or " + getVolume().toFixed(2);
+	vText = document.getElementById("vText");
+	vText.innerHTML = "Volume: " + v + "m^3";
 }
 
