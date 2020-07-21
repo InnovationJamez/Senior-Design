@@ -59,7 +59,7 @@ function calcScore(){
 	/*
 		print the score
 	*/
-	console.log(score);
+	document.getElementById("score").innerHTML = "Score: " + score + "/5";
 }
 
 /*

@@ -188,12 +188,21 @@
 
 	<hr>
 
-	<h3>please type name & email, and then click the submitt button</h3>
+	<h3>please type name & email, and then click the submitt button to get your score</h3>
 
-	<label>Last Name: </label><input id="lName"><br>
-	<label>First Name: </label><input id="fName"><br>
-	<label>Email: </label><input id="email"><br>
-	<button onclick="submitt()">Enter</button>
+	<table>
+		<tr>
+			<th>
+				<label>Last Name: </label><input id="lName"><br>
+				<label>First Name: </label><input id="fName"><br>
+				<label>Email: </label><input id="email"><br>
+				<button onclick="submitt()">Enter</button>
+			</th>
+			<th>
+				<h1 id="score">Score: </h1>
+			</th>
+		</tr>
+	</table>
 
 	<!-- script -->
 	<script src="JS/knowledgeTest.js"></script>
