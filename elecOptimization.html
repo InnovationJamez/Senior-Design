@@ -12,6 +12,9 @@
 	  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
+	<!-- jquery -->
+	<script src="JS\jquery.js"></script>
+
 	<!-- page specific safety -->
 	<style type="text/css">
 		table, th, td {
@@ -19,6 +22,9 @@
 		  border-collapse: collapse;
 		  padding: 10px;
 		  margin: 10px;
+		}
+		#right{
+			float: left;
 		}
 	</style>
 </head>
@@ -39,7 +45,7 @@
 	<h1>Water info</h1><hr/>
 	<h2>Daily Water Usage</h2>
 	<p>As explained by The US Geological survey, the average person uses about 80-100 gallons of water per day for indoor home use[1]. Enter the number of people in the box bellow and the total water usage will appear next to it.</p>
-	<label>Number of people: </label><input type="number" value="1" step="1" id="numPep" input>
+	<label>Number of people: </label><input type="number" value="1" step="1" id="numPep" min="0">
 	<button onclick="calcWater()">Enter</button><br/>
 	<label>Amount of water: </label><label id="waterOut"></label>
 
@@ -203,124 +209,314 @@
 
 	<hr>
 
-	<!--
-	<hr>
-	<h3>Calculations</h3>
+	<h2>Calculations</h2>
+
+
+	<h3>Diagram</h3>
 	<img src="images/cell_pair_diagram.PNG" width="500"/><br/>
 
-	<span id="form">
-  	$$ 
-  		{&Lambda; U A_{eff}&zeta; \over zFQ&Delta;} =
-		-ln{C_s^{fd} - C_s^{&Delta;} \over C_s^{fc} - C_s^{&Delta;}} +
-		ln{ C_s^{fd} \over C_s^{fc} } + 
-		{&Lambda;(&rho;_A + &rho;_C)C_s^{&Delta;} \over &Delta;}
-  	$$
-  	</span>
+	<h3>Formulas</h3>
+
+	<th><img src="images/formb.PNG" width="500"/>
+	<th><img src="images/iform.PNG" width="500"/>
+	<th><img src="images/k.PNG" width="500"/><br/>
 
 
-	<table>
-		<td>
-			<th>Symbol</th>
-			<th>Parameter</th>
-			<th>Unit</th>
-			<th>Effect on process</th>
-		</td>
-		<td>
-			<td>dC<sub>s</sub><sup>&Delta;</sup></td>
-			<td>
-				the concentdation difference between
-				the feed solution and the dilute solution.
-			</td>
-			<td>
-				$${keg\over m^2}$$
-			</td>
-			<td>
-				The bigger the concentdation difference the more salt that is reomved from the water.
-			</td>
-		</td>
-		<td>
-			<td>i</td>
-			<td>Current density</td>
-			<td>$$ { A \over m^2 } $$</td>
-			<td>During operation, the current density should
-				not exceed the limiting current density.</td>
-		</td>
-		<td>
-			<td>&zeta;</td>
-			<td>current utilization</td>
-			<td></td>
-			<td></td>
-		</td>
-		<td>
-			<td>Q</td>
-			<td>producation rate</td>
-			<td>$${m^3\over d}$$</td>
-			<td></td>
-		</td>
-		<td>
-			<td>A<sub>eff</sub></td>
-			<td>effective membrane area per cell</td>
-			<td>$$ m^2 $$</td>
-			<td></td>
-		</td>	
-		<td>
-			<td>k<sub>av</sub></td>
-			<td>average specific electdical con-ductivity of the concentdate and dilute solution in a cell pair,</td>
-			<td></td>
-			<td></td>
-		</td>
-		<td>
-			<td>U</td>
-			<td>the applied voltage</td>
-			<td></td>
-			<td></td>
-		</td>	
-		<td>
-			<td>N</td>
-			<td>number of cells</td>
-			<td></td>
-			<td></td>
-		</td>	
-		<td>
-			<td>&zeta;</td>
-			<td>current utilization</td>
-			<td>unitless</td>
-			<td></td>
-		</td>
-		<td>
-			<td>&Delta;</td>
-			<td>the thickness of a unit cell</td>
-			<td>m</td>
-			<td>The grater the distance between the cells the less current desnity.</td>
-		</td>
-		<td>
-			<td>k<sub>c</sub></td>
-			<td>Electdical conductivity of concentdate</td>
-			<td>$${S \over m}$$</td>
-			<td></td>
-		</td>	
-		<td>
-			<td>k<sub>d</sub></td>
-			<td>Electdical conductivity of dilute</td>
-			<td>$${S \over m}$$</td>
-			<td></td>
-		</td>	
-		<td>
-			<td>&rho;<sub>A</sub>+&rho;<sub>C</sub></td>
-			<td>Total area resistance of membranes</td>
-			<td>$${ &Omega;m^2 }$$</td>
-			<td>The grater the resistance the lower the effect current and resucing the degree of desalination.</td>
-		</td>			
-	<table>
 
-	<h3>Enter vales of contdol the output of the calculation</h3>
-	<label>Membrane area: </label><input><br/>
-	<label>Current: </label><input><br/>
-	<label>other: </label><input><br/>
-	<label>other: </label><input><br/>
-	<label>other: </label><input><br/>
+	<!-- talbe of comercial products -->
+
+	<div style="border:0px">
+		<span style="float:left;">
+			<table>
+				<tr>
+					<th colspan="4"><h2>Comercial cation exchange membranes</h2></th>
+				</tr>
+				<tr>
+					<th>Membrane</th>
+					<th>Company</th>
+					<th>Thickness (mm)</th>
+					<th>Area resistance $$ ( \Omega cm^2) $$</th>
+				</tr>
+				<tr>
+					<td>CMV</td>
+					<td>Asahi Glass</td>
+					<td>0.13 - 0.15</td>
+					<td>2.0 - 3.5</td>
+				</tr>		
+				<tr>
+					<td>MC-3470</td>
+					<td>Ionac</td>
+					<td>0.34</td>
+					<td>5</td>
+				</tr>
+				<tr>
+					<td>CM-1</td>
+					<td>Tokuyama</td>
+					<td>0.15 - 0.17</td>
+					<td>2.2 - 3.0</td>
+				</tr>
+				<tr>
+					<td>CMX</td>
+					<td>Tokuyama</td>
+					<td>0.17 - 0.19</td>
+					<td>2.5 - 3.5</td>
+				</tr>
+				<tr>
+					<td>CMS</td>
+					<td>Tokuyama</td>
+					<td>0.14 - 0.17</td>
+					<td>1.5 - 2.5</td>
+				</tr>
+				<tr>
+					<td>CMB</td>
+					<td>Tokuyama</td>
+					<td>0.18 - 0.24</td>
+					<td>4.0 - 5.0</td>
+				</tr>
+				<tr>
+					<td>R1010</td>
+					<td>PALL</td>
+					<td>0.04</td>
+					<td>0.3</td>
+				</tr>
+				<tr>
+					<td>R4010</td>
+					<td>PALL</td>
+					<td>0.07</td>
+					<td>0.6</td>
+				</tr>
+				<tr>
+					<td>RA4010</td>
+					<td>PALL</td>
+					<td>0.64</td>
+					<td>2.0</td>
+				</tr>
+				<tr>
+					<td>CDS</td>
+					<td>Solvay</td>
+					<td>0.16</td>
+					<td>1.1 - 1.8</td>
+				</tr>
+				<tr>
+					<td>CRA</td>
+					<td>Solvay</td>
+					<td>0.16</td>
+					<td>1.3 - 3</td>
+				</tr>
+			</table>
+		</span>
+		<span>
+			<table>
+				<tr>
+					<th colspan="4"><h2>Comercial anion exchange membranes</h2></th>
+				</tr>
+				<tr>
+					<th>Membrane</th>
+					<th>Company</th>
+					<th>Thickness (mm)</th>
+					<th>Area resistance $$ ( \Omega cm^2) $$</th>
+				</tr>
+				<tr>
+					<td>AMV</td>
+					<td>Asahi Glass</td>
+					<td>0.11 - 0.15</td>
+					<td>1.5 - 3.0</td>
+				</tr>	
+				<tr>
+					<td>ASV</td>
+					<td>Asahi Glass</td>
+					<td>0.11 - 0.15</td>
+					<td>2.3 - 3.5</td>
+				</tr>
+				<tr>
+					<td>AM-1</td>
+					<td>Tokuyama</td>
+					<td>0.13 - 0.16</td>
+					<td>1.3 - 2.0</td>
+				</tr>
+				<tr>
+					<td>AMX</td>
+					<td>Tokuyama</td>
+					<td>0.16 - 0.18</td>
+					<td>2.5 - 3.5</td>
+				</tr>
+				<tr>
+					<td>ACS</td>
+					<td>Tokuyama</td>
+					<td>0.15 - 2.0</td>
+					<td>2.0 - 2.5</td>
+				</tr>
+				<tr>
+					<td>AFN</td>
+					<td>Tokuyama</td>
+					<td>0.15 - 0.20</td>
+					<td>0.4 - 1.5</td>
+				</tr>
+				<tr>
+					<td>AHA</td>
+					<td>Tokuyama</td>
+					<td>0.18 - 0.24</td>
+					<td>8.0 - 14.0</td>
+				</tr>
+				<tr>
+					<td>R1030</td>
+					<td>PALL</td>
+					<td>0.04</td>
+					<td>1.0</td>
+				</tr>
+				<tr>
+					<td>R4030</td>
+					<td>PALL</td>
+					<td>0.07</td>
+					<td>1.7</td>
+				</tr>
+				<tr>
+					<td>ADP</td>
+					<td>Solvay</td>
+					<td>0.16</td>
+					<td>1.8 - 3.5</td>
+				</tr>
+			</table>
+		</span>
+	</div><br><h2></h2>
+
+	<!-- 
+		select membranes
 	-->
 
+	<h2>Select your membrane</h2>
+
+	<h3>Cation exchange membrane</h3>
+
+	<select id="cationSelect">
+		<option>CMV</option>
+		<option>MC-3470</option>
+		<option>CM-1</option>
+		<option>CMX</option>
+		<option>CMS</option>
+		<option>CMB</option>
+		<option>R1010</option>
+		<option>R4010</option>
+		<option>CDS</option>
+		<option>CRA</option>
+	</select>
+
+	<h3>Anion exchange membrane</h3>
+
+	<select id="anionSelect">
+		<option>AMV</option>
+		<option>ASV</option>
+		<option>AM-1</option>
+		<option>AMX</option>
+		<option>ACS</option>
+		<option>AFN</option>
+		<option>AHA</option>
+		<option>R1030</option>
+		<option>R4030</option>
+		<option>ADP</option>
+	</select>
+
+	<!-- 
+		calculations 
+	-->
+	<h2 style="text-align: center">Calculations</h2>
+
+	<table>
+		<tr>
+			<th>Symbol</th>
+			<th>Name</th>
+			<th>Input</th>
+			<th>unit</th>
+		</tr>
+		<tr>
+			<td> $$ C_s^{fd} $$ </td>
+			<td>Input water salinity</td>
+			<td> <input type="number" value="10" id="inSalinity"> </td>
+			<td> $$ K_{eq} \over {m^3} $$ </td>
+		</tr>
+		<tr>
+			<td> $$ F $$ </td>
+			<td> Faraday's constant</td>
+			<td> $$ 9.65 x 10^4 $$ </td>
+			<td> $$ C/mol $$ </td>
+		</tr>
+		<tr>
+			<td> $$ U $$ </td>
+			<td> Applied voltage</td>
+			<td> <input type="number" value="5" id="U"> </td>
+			<td> $$ V $$ </td>
+		</tr>
+		<tr>
+			<td> $$ N $$ </td>
+			<td> Number of cell pairs</td>
+			<td> <input type="number" value="5" id="N"> </td>
+			<td> NULL </td>
+		</tr>
+		<tr>
+			<td> $$ \Delta $$ </td>
+			<td> Thickness of unit cell </td>
+			<td> <input type="number" value="0.001" step="0.001" id="delta"> </td>
+			<td> m </td>
+		</tr>
+		<tr>
+			<td> $$ Q  $$ </td>
+			<td>Production rate</td>
+			<td> <input type="number" value="1" id="Q"> </td>
+			<td>$$ m^3 \over day $$</td>
+		</tr>
+		<tr>
+			<td> $$ dA_{eff} $$ </td>
+			<td>Membrane effecive area</td>
+			<td> <input type="number" value="0.1" id="area"> </td>
+			<td>$$ m^2 $$</td>
+		</tr>
+		<tr>
+			<td>$$ \rho_c $$</td>
+			<td>cation membrane area resistance</td>
+			<td id="catResValue">Select membrane to get value</td>
+			<td>$$ ( \Omega cm^2) $$</td>
+		</tr>
+		<tr>
+			<td> $$ \rho_a $$ </td>
+			<td>anion membrane area resistance</td>
+			<td id="anResValue">Select membrane to get value</td>
+			<td>$$ ( \Omega cm^2) $$ </td>
+		</tr>
+		<tr>
+			<td> $$ \zeta $$ </td>
+			<td>current utilization</td>
+			<td> <input type="number" value="0.09" id="zeta"></td>
+			<td>NULL</td>
+		</tr>
+	</table>
+
+	<button id="enterBtn">Enter</button>
+
+	<h2>Output</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Number</th>
+			<th>Unit</th>
+		</tr>
+		<tr>
+			<td>Input salinity</td>
+			<td id="out1"></td>
+			<td>$$ K_{eq} \over {m^3} $$</td>
+		</tr>
+		<tr>
+			<td>Degree of desalination</td>
+			<td id="out2"></td>
+			<td>$$ K_{eq} \over {m^3} $$</td>
+		</tr>
+		<tr>
+			<td>Output salinity</td>
+			<td id="out3"></td>
+			<td>$$ K_{eq} \over {m^3} $$</td>
+		</tr>
+	</table>
+
+  	<hr>
 	<h1>Sources</h1>
 	<p>
 		<ol>
